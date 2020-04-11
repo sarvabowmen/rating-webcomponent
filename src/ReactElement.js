@@ -3,12 +3,9 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import RatingComponent from './RatingComponent.js';
 
 class ReactElement extends HTMLElement {
-  
-  constructor() {
-    super();
-    this.observer = new MutationObserver(() => this.update());
-    this.observer.observe(this, { attributes: true });
-  }
+
+  static observedAttributes = ['value'];
+ 
 
   connectedCallback() {
     this._innerHTML = this.innerHTML;
@@ -20,7 +17,7 @@ class ReactElement extends HTMLElement {
     this.observer.disconnect();
   }
 
-  update() {
+  attributeChangedCallback() {
     this.unmount();
     this.mount();
   }
@@ -29,17 +26,13 @@ class ReactElement extends HTMLElement {
     const props = {
       ...this.getProps(this.attributes),
       ...this.getEvents(),
-      children: this.parseHtmlToReact(this.innerHTML)
+      children: this.innerHTML
     };
     render(<RatingComponent {...props} />, this);
   }
 
   unmount() {
     unmountComponentAtNode(this);
-  }
-
-  parseHtmlToReact(html) {
-    return html;
   }
 
   getProps(attributes) {

@@ -34,6 +34,7 @@
         <h1>Rating element with webcomponents</h1>
         <rating-element maxValue=5 value=0 onratingupdatedevt="onratingupdatedevt"></rating-element> 
         <div id="result"></div>
+        <button id="btnReset">Reset</button>
       </div>
      </div>
      
@@ -50,10 +51,17 @@
     -->
   </body>
   <script>
+    const btn =  document.getElementById('btnReset');
     const reactEl = document.getElementsByTagName('rating-element')[0];
+    btn.onclick = function (event) {
+      reactEl.setAttribute("value", 0);
+      var reactResultEl = document.getElementById('result');
+      reactResultEl.innerHTML = "You have rated " + event.detail;
+    };
+   
     reactEl.addEventListener("onratingupdatedevt", function (event) {
       var reactResultEl = document.getElementById('result');
       reactResultEl.innerHTML = "You have rated " + event.detail;
-    })
+    });
   </script>
 </html>
