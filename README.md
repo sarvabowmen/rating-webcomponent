@@ -2,9 +2,9 @@
 
 Steps to run the app
 
-1. yarn to install dependencies
-2. yarn build to build the app
-3. yarn server to run the app from build folder 
+1.To install dependencies - ##yarn 
+2. To build the app - ##yarn build
+3. To run the app from build folder - ##yarn server
 
 
 index.html - Has the rating webcomponent defined in html and the callbacks are defined inside the script tags
